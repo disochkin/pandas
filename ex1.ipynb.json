@@ -1,0 +1,150 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Name\n",
+       "John        9701\n",
+       "William     9562\n",
+       "Mary        7092\n",
+       "James       5949\n",
+       "Charles     5359\n",
+       "            ... \n",
+       "Sylvanus       5\n",
+       "Bulah          5\n",
+       "Duff           5\n",
+       "Nolie          5\n",
+       "Bradley        5\n",
+       "Name: Data, Length: 1889, dtype: int64"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "file_dir = \"names\"\n",
+    "def get_top3(years):\n",
+    "    ac = []\n",
+    "    for year in years:\n",
+    "        gl = pd.read_csv(f\"{file_dir}/yob{year}.txt\",header =None)\n",
+    "        gl.columns = ['Name', 'Gender', 'Data']\n",
+    "        ac.append(gl)\n",
+    "    total = pd.concat(ac)\n",
+    "    total.reset_index(drop=True, inplace=True)\n",
+    "    df = total.groupby(\"Name\").sum()\n",
+    "    df2 = df.sort_values('Data', ascending= False)\n",
+    "    return df2[\"Data\"]\n",
+    "    #z = df2['Name']\n",
+    "    #total2  = total.groupby([\"Name\"])\n",
+    "    #total2.sort_values(by=[\"Data\"],ascending=False, inplace=True)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Name\n",
+       "John        9701\n",
+       "William     9562\n",
+       "Mary        7092\n",
+       "James       5949\n",
+       "Charles     5359\n",
+       "            ... \n",
+       "Sylvanus       5\n",
+       "Bulah          5\n",
+       "Duff           5\n",
+       "Nolie          5\n",
+       "Bradley        5\n",
+       "Name: Data, Length: 1889, dtype: int64"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "get_top3([1880])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Name\n",
+       "James      111789\n",
+       "John       109601\n",
+       "Robert     101368\n",
+       "Michael     97969\n",
+       "William     90137\n",
+       "            ...  \n",
+       "Takai           5\n",
+       "Davelle         5\n",
+       "Tajohn          5\n",
+       "Renuka          5\n",
+       "Nijha           5\n",
+       "Name: Data, Length: 31932, dtype: int64"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "get_top3([1900, 1950, 2000])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
